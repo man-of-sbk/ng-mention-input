@@ -1,0 +1,42 @@
+  
+<div class="mention-input">
+  <div
+    class="mention-input__input-container"
+    (click)="onInputContainerIsClicked()"
+  >
+    <div
+      *ngFor="let itemData of selectedItems"
+      class="mention-input__mention-badge-container"
+    >
+      <app-mention-badge
+        [content]="getMentionItemContent(itemData)"
+        (deleteBtnIsClicked)="onMentionItemDeleteBtnIsClicked(itemData)"
+      ></app-mention-badge>
+    </div>
+
+    <div class="mention-input__input-section">
+      <input
+        #mentionInputRef
+        class="mention-input__input"
+        type="text"
+        [size]="inputSize"
+        [(ngModel)]="mentionInputValue"
+        (input)="onInputIsChanged($event)"
+        (keydown)="onInputIsKeyedDown($event)"
+      >
+
+      <div
+        *ngIf="shouldMentionListBeDisplayed"
+        class="mention-input__mention-list"
+      >
+        <div
+          *ngFor="let mentionItem of _mentionlist"
+          class="mention-input__mention-item"
+          (click)="onMentionItemIsClicked(mentionItem)"
+        >
+          {{ getMentionItemContent(mentionItem) }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
